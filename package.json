@@ -1,0 +1,10 @@
+{
+  "name": "tarea_03_sistemas_sistribuidos_back_end_faas",
+  "version": "1.0.0",
+  "description": "Tarea III - funciones como servicio AWS Lambda en Netlify, sistemas distribuidos 2023 - UNA",
+  "author": "David Rojas Chavarria",
+  "license": "Unlicense",
+  "dependencies": {
+    "mongodb": "latest"
+  }
+}
