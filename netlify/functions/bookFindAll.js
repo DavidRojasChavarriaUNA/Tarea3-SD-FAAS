@@ -1,6 +1,6 @@
 "use strict"
 
-//const clientPromise = require('./mongoDB');
+const clientPromise = require('./mongoDB');
 const headers = require('./headersCORS');
 
 exports.handler = async (event, context) => {
@@ -10,12 +10,11 @@ exports.handler = async (event, context) => {
   }
 	
   try {
-    //const client = await clientPromise;
+    const client = await clientPromise;
 
-    //const authors = await client.db("Tarea3").collection("Books").find({}).toArray();
+    const authors = await client.db("Tarea3").collection("Books").find({}).toArray();
 
-    //return { statusCode: 200, headers, body: JSON.stringify(authors)};
-    return { statusCode: 200, headers, body: JSON.stringify({"id": 0, "prueba": "David"})};
+    return { statusCode: 200, headers, body: JSON.stringify(authors)};
   } catch (error) {
     console.log(error);
     return { statusCode: 400, headers, body: JSON.stringify(error) };
