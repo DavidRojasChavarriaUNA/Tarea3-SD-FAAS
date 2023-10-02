@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
     const data = JSON.parse(event.body);
     console.log(event.body)
 
-    if(client.db(dbName).collection(collection.Books).find({"_id":id}).limit(1).length === 1){
+    if(client.db(dbName).collection(collection.Books).find({"_id": id}).limit(1).length < 1){
       return {
         statusCode: 404,
         headers,
