@@ -19,6 +19,14 @@ exports.handler = async (event, context) => {
     data._id = parseInt(data._id)
     console.log(event.body)
 
+    if(client.db(dbName).collection(collection.Publishers).find({"_id":data._id}).limit(1).length === 1){
+      return {
+        statusCode: 422,
+        headers,
+        body: "A record already exists with the indicated id"
+      };
+    }
+
     await client.db(dbName).collection(collection.Publishers).insertOne(data);
 
     return {
