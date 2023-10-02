@@ -13,6 +13,8 @@ module.exports = {
   clientPromise: client.connect(),
   dbName: "Tarea3",
   collection:{
-    Books:"Books"
+    Books:"Books",
+    Authors: "Authors",
+    Publishers: "Publishers"
   }
 }

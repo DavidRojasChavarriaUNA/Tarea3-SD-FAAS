@@ -16,12 +16,12 @@ exports.handler = async (event, context) => {
   try {
     const client = await clientPromise;
 
-    const books = await client.db(dbName).collection(collection.Books).find({}).toArray();
+    const authors = await client.db(dbName).collection(collection.Authors).find({}).toArray();
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(books)
+      body: JSON.stringify(authors)
     };
   } catch (error) {
     console.log(error);

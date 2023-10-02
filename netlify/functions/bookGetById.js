@@ -17,17 +17,17 @@ exports.handler = async (event, context) => {
     const client = await clientPromise;
     const id = parseInt(event.path.split("/").reverse()[0]);
 
-    const authors =
+    const books =
       await client.db(dbName).collection(collection.Books).find({
         _id: id
       }).toArray();
 
-    const author = (authors.length > 0)? authors[0] : null;
+    const book = (books.length > 0)? books[0] : null;
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(author)
+      body: JSON.stringify(book)
     };
   } catch (error) {
     console.log(error);

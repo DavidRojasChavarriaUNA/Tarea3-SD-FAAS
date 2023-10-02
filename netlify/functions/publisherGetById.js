@@ -15,13 +15,19 @@ exports.handler = async (event, context) => {
 
   try {
     const client = await clientPromise;
+    const id = parseInt(event.path.split("/").reverse()[0]);
 
-    const books = await client.db(dbName).collection(collection.Books).find({}).toArray();
+    const publishers =
+      await client.db(dbName).collection(collection.Publishers).find({
+        _id: id
+      }).toArray();
+
+    const publisher = (publishers.length > 0)? publishers[0] : null;
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(books)
+      body: JSON.stringify(publisher)
     };
   } catch (error) {
     console.log(error);
