@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
     const data = JSON.parse(event.body);
     console.log(event.body)
 
-    if (client.db(dbName).collection(collection.Books).find({
+    /*if (client.db(dbName).collection(collection.Books).find({
         "_id": id
       }).limit(1).length < 1) {
       return {
@@ -43,7 +43,12 @@ exports.handler = async (event, context) => {
         headers,
         body: 'OK'
       };
-    }
+    }*/
+      return {
+        statusCode: 200,
+        headers,
+        body: 'probanco cambio'
+      };
   } catch (error) {
     console.log(error);
     return {
