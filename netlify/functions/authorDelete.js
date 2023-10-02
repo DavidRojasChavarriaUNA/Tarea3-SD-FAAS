@@ -1,6 +1,10 @@
 "use strict"
 
-const {clientPromise, dbName, collection} = require('./mongoDB');
+const {
+  clientPromise,
+  dbName,
+  collection
+} = require('./mongoDB');
 const headers = require('./headersCORS');
 
 exports.handler = async (event, context) => {
@@ -17,15 +21,23 @@ exports.handler = async (event, context) => {
     const client = await clientPromise;
     const id = parseInt(event.path.split("/").reverse()[0]);
 
-    await client.db(dbName).collection(collection.Authors).deleteOne({
+    const result = await client.db(dbName).collection(collection.Authors).deleteOne({
       _id: id
     });
-
-    return {
-      statusCode: 200,
-      headers,
-      body: 'OK'
-    };
+    if (result.deletedCount === 1) {
+      return {
+        statusCode: 200,
+        headers,
+        body: 'OK'
+      };
+    }
+    else{
+      return {
+        statusCode: 404,
+        headers,
+        body: 'Author not found'
+      };
+    }
   } catch (error) {
     console.log(error);
     return {
