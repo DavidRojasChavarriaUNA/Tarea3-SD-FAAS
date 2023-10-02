@@ -15,15 +15,11 @@ exports.handler = async (event, context) => {
 
   try {
     const client = await clientPromise;
-    const id = parseInt(event.path.split("/").reverse()[0]);
     const data = JSON.parse(event.body);
+    data._id = parseInt(data._id)
     console.log(event.body)
 
-    await client.db(dbName).collection(collection.Books).updateOne({
-      _id: id
-    }, {
-      $set: data
-    });
+    await client.db(dbName).collection(collection.Books).insertOne(data);
 
     return {
       statusCode: 200,
