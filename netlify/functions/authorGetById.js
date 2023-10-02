@@ -1,6 +1,10 @@
 "use strict"
 
-const {clientPromise, dbName, collection} = require('./mongoDB');
+const {
+  clientPromise,
+  dbName,
+  collection
+} = require('./mongoDB');
 const headers = require('./headersCORS');
 
 exports.handler = async (event, context) => {
@@ -22,13 +26,20 @@ exports.handler = async (event, context) => {
         _id: id
       }).toArray();
 
-    const author = (authors.length > 0)? authors[0] : null;
-
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify(author)
-    };
+    const author = (authors.length > 0) ? authors[0] : null;
+    if (author) {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(author)
+      };
+    } else {
+      return {
+        statusCode: 404,
+        headers,
+        body: 'Author not found'
+      };
+    }
   } catch (error) {
     console.log(error);
     return {
