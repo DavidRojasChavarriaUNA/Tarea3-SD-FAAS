@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
       };
     } else {
       return {
-        statusCode: 404,
+        statusCode: 200,
         headers,
         body: 'Books not found'
       };
