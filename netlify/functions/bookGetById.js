@@ -22,10 +22,12 @@ exports.handler = async (event, context) => {
         _id: id
       }).toArray();
 
+    const author = (authors.length > 0)? authors[0] : null;
+
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify(authors)
+      body: JSON.stringify(author)
     };
   } catch (error) {
     console.log(error);
