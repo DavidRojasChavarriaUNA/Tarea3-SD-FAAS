@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
     const client = await clientPromise;
 
     const publishers = await client.db(dbName).collection(collection.Publishers).find({}).toArray();
-    if (publishers) {
+    if (publishers.length> 0) {
       return {
         statusCode: 200,
         headers,
