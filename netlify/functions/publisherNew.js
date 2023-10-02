@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
 
     if(client.db(dbName).collection(collection.Publishers).find({"_id":data._id}).limit(1).length === 1){
       return {
-        statusCode: 403,
+        statusCode: 404,
         headers,
         body: "A record already exists with the indicated id"
       };
