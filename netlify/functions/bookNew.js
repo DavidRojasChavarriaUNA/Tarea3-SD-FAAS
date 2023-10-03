@@ -21,19 +21,19 @@ exports.handler = async (event, context) => {
 
     if(await client.db(dbName).collection(collection.Books).find({"_id":data._id}).limit(1).length === 1){
       return {
-        statusCode: 422,
+        statusCode: 200,
         headers,
         body: "A record already exists with the indicated id"
       };
     }
 
-    await client.db(dbName).collection(collection.Books).insertOne(data);
+    /*await client.db(dbName).collection(collection.Books).insertOne(data);
 
     return {
       statusCode: 200,
       headers,
       body: 'OK'
-    };
+    };*/
   } catch (error) {
     console.log(error);
     return {
