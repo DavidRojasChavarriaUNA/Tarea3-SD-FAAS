@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
     data._id = parseInt(data._id)
     console.log(event.body)
 
-    if(client.db(dbName).collection(collection.Books).find({"_id":data._id}).limit(1).length === 1){
+    if(await client.db(dbName).collection(collection.Books).find({"_id":data._id}).limit(1).length === 1){
       return {
         statusCode: 422,
         headers,
