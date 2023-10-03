@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
     const author =
       await client.db(dbName).collection(collection.Authors).findOne({
         _id: id
-      }).toArray();
+      });
 
     if (author) {
       return {
