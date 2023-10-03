@@ -21,12 +21,11 @@ exports.handler = async (event, context) => {
     const client = await clientPromise;
     const id = parseInt(event.path.split("/").reverse()[0]);
 
-    const authors =
-      await client.db(dbName).collection(collection.Authors).find({
+    const author =
+      await client.db(dbName).collection(collection.Authors).findOne({
         _id: id
       }).toArray();
 
-    const author = (authors.length > 0) ? authors[0] : null;
     if (author) {
       return {
         statusCode: 200,
