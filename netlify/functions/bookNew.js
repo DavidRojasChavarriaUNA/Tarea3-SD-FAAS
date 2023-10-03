@@ -1,6 +1,10 @@
 "use strict"
 
-const {clientPromise, dbName, collection} = require('./mongoDB');
+const {
+  clientPromise,
+  dbName,
+  collection
+} = require('./mongoDB');
 const headers = require('./headersCORS');
 
 exports.handler = async (event, context) => {
@@ -26,19 +30,19 @@ exports.handler = async (event, context) => {
 
     if (book) {
       return {
-        statusCode: 200,
+        statusCode: 422,
         headers,
         body: "A record already exists with the indicated id"
       };
+    } else {
+      await client.db(dbName).collection(collection.Books).insertOne(data);
+
+      return {
+        statusCode: 200,
+        headers,
+        body: 'OK'
+      };
     }
-
-    /*await client.db(dbName).collection(collection.Books).insertOne(data);
-
-    return {
-      statusCode: 200,
-      headers,
-      body: 'OK'
-    };*/
   } catch (error) {
     console.log(error);
     return {
