@@ -23,25 +23,22 @@ exports.handler = async (event, context) => {
     const data = JSON.parse(event.body);
     console.log(event.body)
 
-    if (client.db(dbName).collection(collection.Books).find({
-        "_id": id
-      }).limit(1).length < 1) {
-      return {
-        statusCode: 404,
-        headers,
-        body: 'Book not found'
-      };
-    } else {
-      await client.db(dbName).collection(collection.Books).updateOne({
-        _id: id
-      }, {
-        $set: data
-      });
-
+    const result = await client.db(dbName).collection(collection.Books).updateOne({
+      _id: id
+    }, {
+      $set: data
+    });
+    if (result.modifiedCount > 0) {
       return {
         statusCode: 200,
         headers,
         body: 'OK'
+      };
+    } else {
+      return {
+        statusCode: 404,
+        headers,
+        body: 'Book not found'
       };
     }
   } catch (error) {
