@@ -28,7 +28,7 @@ exports.handler = async (event, context) => {
     }, {
       $set: data
     });
-    if (result.modifiedCount > 0) {
+    if (result.matchedCount > 0) {
       return {
         statusCode: 200,
         headers,
